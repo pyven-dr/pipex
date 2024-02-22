@@ -17,15 +17,16 @@ int	close_pipes(t_pipex *pipex)
 	int	i;
 
 	i = 0;
-	close(pipex->fd_infile);
-	close(pipex->fd_outfile);
+	if (pipex->fd_infile != -1)
+		close(pipex->fd_infile);
+	if (pipex->fd_outfile != -1)
+		close(pipex->fd_outfile);
 	while (i < pipex->nb_cmd - 1)
 	{
 		close(pipex->fd[i][0]);
 		close(pipex->fd[i][1]);
 		i++;
 	}
-	free(pipex->fd);
 	return (0);
 }
 

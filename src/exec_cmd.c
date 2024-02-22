@@ -12,6 +12,19 @@
 
 #include "pipex.h"
 
+void	free_cmd(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] != NULL)
+	{
+		free(cmd[i]);
+		i++;
+	}
+	free(cmd);
+}
+
 int	dup_fd(t_pipex *pipex, int arg_nb)
 {
 	int	fd1;
@@ -43,7 +56,8 @@ int	dup_fd(t_pipex *pipex, int arg_nb)
 int	exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp)
 {
 	char	**cmd;
-	int		id;
+	pid_t	id;
+	char	*cmd_path;
 
 	id = fork();
 	if (id < 0)
@@ -52,11 +66,24 @@ int	exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp)
 	{
 		cmd = ft_split(arg, ' ');
 		if (cmd == NULL)
-			return (1);
+			exit(1);
 		if (dup_fd(pipex, arg_nb) == 1)
-			return (1);
+		{
+			free_cmd(cmd);
+			exit(1);
+		}
 		close_pipes(pipex);
-		execve(get_cmd_path(pipex, envp, cmd[0]), cmd, envp);
+		cmd_path = get_cmd_path(pipex, envp, cmd[0]);
+		free_cmd(pipex->paths);
+		free_pipex(pipex);
+		if (cmd_path == NULL)
+		{
+			close(1);
+			close(0);
+			free_cmd(cmd);
+			exit(1);
+		}
+		execve(cmd_path, cmd, envp);
 		perror("Execve error");
 		exit(1);
 	}

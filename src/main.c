@@ -22,13 +22,18 @@ int	main(int argc, char **argv, char **envp)
 	if (pipex == NULL)
 		return (1);
 	init(pipex, argc, argv);
-	while (i < pipex->nb_cmd)
+	if (pipex->fd_infile == -1)
+		i++;
+	if (pipex->fd_outfile == -1)
+		argc--;
+	while (i < argc - 3)
 	{
 		exec_cmd(pipex, argv[i + 2], i, envp);
 		i++;
 	}
-	waitpid(WAIT_ANY, NULL, 0);
 	free_pipex(pipex);
+	while (wait(NULL) >= 0)
+		;
 	return (0);
 }
 

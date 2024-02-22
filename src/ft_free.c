@@ -14,7 +14,7 @@
 
 void	free_pipex(t_pipex *pipex)
 {
-	free(pipex->paths);
 	close_pipes(pipex);
+	free(pipex->fd);
 	free(pipex);
 }

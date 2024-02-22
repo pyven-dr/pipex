@@ -43,6 +43,8 @@ char	*find_command(char **path, char *command)
 		free(command_path);
 		i++;
 	}
+	ft_putstr_fd(command, 2);
+	ft_putendl_fd(": command not found", 2);
 	return (NULL);
 }
 
