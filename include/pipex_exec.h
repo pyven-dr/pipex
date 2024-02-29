@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   pipex_exec.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 00:53:19 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/02/18 00:53:19 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 02:28:13 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 02:28:13 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_pipe.h"
-#include "pipex.h"
+#ifndef PIPEX_EXEC_H
+# define PIPEX_EXEC_H
 
-void	free_pipex(t_pipex *pipex)
-{
-	close_pipes(pipex);
-	free(pipex->fd);
-	free(pipex);
-}
+# include "pipex_struct.h"
+# include "libft.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
-void	free_cmd(char **cmd)
-{
-	int	i;
+int		dup_fd(t_pipex *pipex, int arg_nb);
+int		exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp);
+void	free_cmd(char **cmd);
+void	exit_child(void);
 
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		free(cmd[i]);
-		i++;
-	}
-	free(cmd);
-}
+#endif

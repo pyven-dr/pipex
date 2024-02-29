@@ -82,5 +82,6 @@ void		*get_elem_vector(t_vector *vector, size_t index);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi_base(char *str, char *base);
 char		*ft_strminiminize(char *str);
+char		*ft_strcpy(char *dest, char *src);
 
 #endif

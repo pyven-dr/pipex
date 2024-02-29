@@ -50,6 +50,7 @@ SRC = ft_atoi.c \
 	 ft_strcmp.c \
 	 ft_atoi_base.c \
 	 ft_strminiminize.c \
+	 ft_strcpy.c
 
 SRC_DIR = src
 

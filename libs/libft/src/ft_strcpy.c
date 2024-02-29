@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 18:31:35 by pyven-dr          #+#    #+#             */
-/*   Updated: 2023/11/14 19:21:41 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/26 02:23:19 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/26 02:23:19 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strcpy(char *dest, char *src)
 {
-	size_t	len;
+	size_t	i;
 
-	len = ft_strlen(s);
-	write(fd, s, len);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = src[i];
+	return (dest);
 }

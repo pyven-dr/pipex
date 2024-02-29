@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   check_absolute_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 18:31:35 by pyven-dr          #+#    #+#             */
-/*   Updated: 2023/11/14 19:21:41 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 00:53:28 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 00:53:28 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex_cmd.h"
 
-void	ft_putstr_fd(char *s, int fd)
+char	*check_absolute_path(char *cmd)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	write(fd, s, len);
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
+	{
+		if (access(cmd, F_OK) == 0)
+			return (ft_strdup(cmd));
+	}
+	return (NULL);
 }

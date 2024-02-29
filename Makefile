@@ -2,6 +2,8 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
+DFLAGS = -MD -MP
+
 INCLUDE_DIR = include
 
 IFLAGS = \
@@ -14,6 +16,13 @@ SRC = main.c \
 	  init.c \
 	  exec_cmd.c \
 	  ft_free.c \
+	  dup_fd.c \
+	  child_error.c \
+	  close_pipes.c \
+	  find_command.c \
+	  get_cmd_path.c \
+	  check_absolute_path.c \
+	  check_argnb.c
 
 BUILD_DIR = .build
 
@@ -41,7 +50,7 @@ $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(LIBFT_DIR)/$(LIBFT)
 	mkdir -p .build
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(DFLAGS) $(IFLAGS) -c $< -o $@
 
 $(LIBFT_DIR)/$(LIBFT): FORCE
 	$(MAKE) -C $(LIBFT_DIR) $(LIBFT)

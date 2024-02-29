@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   pipex_cmd.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/18 00:53:19 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/02/18 00:53:19 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 00:58:10 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 00:58:10 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_pipe.h"
-#include "pipex.h"
+#ifndef PIPEX_CMD_H
+# define PIPEX_CMD_H
 
-void	free_pipex(t_pipex *pipex)
-{
-	close_pipes(pipex);
-	free(pipex->fd);
-	free(pipex);
-}
+# include "pipex_struct.h"
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
 
-void	free_cmd(char **cmd)
-{
-	int	i;
+char	*find_path(char	**envp);
+char	*find_command(char **path, char *command);
+char	*get_cmd_path(t_pipex *pipex, char **envp, char *command);
+char	*check_absolute_path(char *cmd);
 
-	i = 0;
-	while (cmd[i] != NULL)
-	{
-		free(cmd[i]);
-		i++;
-	}
-	free(cmd);
-}
+#endif

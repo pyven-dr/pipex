@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   close_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 13:02:02 by pyven-dr          #+#    #+#             */
-/*   Updated: 2024/02/12 13:02:02 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 00:48:09 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 00:48:09 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 #include "pipex_pipe.h"
 
-int	init(t_pipex *pipex, int argc, char **argv)
+int	close_pipes(t_pipex *pipex)
 {
-	pipex->nb_cmd = argc - 3;
-	pipex->paths = NULL;
-	pipex->fd_infile = open(argv[1], O_RDONLY);
-	if (pipex->fd_infile == -1)
-		perror(argv[1]);
-	pipex->fd_outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (pipex->fd_outfile == -1)
-		perror(argv[argc - 1]);
-	if (create_pipes(pipex, argc) == -1)
-	{
-		perror("Pipe error");
+	int	i;
+
+	i = 0;
+	if (pipex->fd_infile != -1)
 		close(pipex->fd_infile);
+	if (pipex->fd_outfile != -1)
 		close(pipex->fd_outfile);
-		return (1);
+	while (i < pipex->nb_cmd - 1)
+	{
+		close(pipex->fd[i][0]);
+		close(pipex->fd[i][1]);
+		i++;
 	}
 	return (0);
 }

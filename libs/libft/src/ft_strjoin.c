@@ -24,13 +24,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!res)
 		return (NULL);
-	while (s1 != NULL && s1[i])
+	while (s1 != NULL && s1[i] != '\0')
 	{
 		res[i] = s1[i];
 		i++;
 	}
 	j = 0;
-	while (s2[j])
+	while (s2[j] != '\0')
 	{
 		res[i + j] = s2[j];
 		j++;

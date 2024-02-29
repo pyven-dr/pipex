@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   pipex_pipe.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 18:31:35 by pyven-dr          #+#    #+#             */
-/*   Updated: 2023/11/14 19:21:41 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 02:25:29 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 02:25:29 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PIPEX_PIPE_H
+# define PIPEX_PIPE_H
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	size_t	len;
+# include "pipex_struct.h"
+# include <stdlib.h>
+# include <unistd.h>
 
-	len = ft_strlen(s);
-	write(fd, s, len);
-}
+int	close_pipes(t_pipex *pipex);
+int	create_pipes(t_pipex *pipex, int argc);
+
+#endif

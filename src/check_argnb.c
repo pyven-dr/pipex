@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   check_argnb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 18:31:35 by pyven-dr          #+#    #+#             */
-/*   Updated: 2023/11/14 19:21:41 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 00:54:26 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 00:54:26 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	check_argnb(int argc)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	write(fd, s, len);
+	if (argc < 5)
+	{
+		ft_putstr_fd("Syntax error : not enough arguments\n", 2);
+		exit(2);
+	}
 }

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   pipex_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pyven-dr <pyven-dr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pyven-dr <pyven-dr@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 18:31:35 by pyven-dr          #+#    #+#             */
-/*   Updated: 2023/11/14 19:21:41 by pyven-dr         ###   ########.fr       */
+/*   Created: 2024/02/29 00:59:53 by pyven-dr          #+#    #+#             */
+/*   Updated: 2024/02/29 00:59:53 by pyven-dr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PIPEX_STRUCT_H
+# define PIPEX_STRUCT_H
 
-void	ft_putstr_fd(char *s, int fd)
+typedef struct s_pipex
 {
-	size_t	len;
+	char	**paths;
+	int		(*fd)[2];
+	int		nb_cmd;
+	int		fd_infile;
+	int		fd_outfile;
+}	t_pipex;
 
-	len = ft_strlen(s);
-	write(fd, s, len);
-}
+#endif

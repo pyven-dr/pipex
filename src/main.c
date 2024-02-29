@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_exec.h"
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	*pipex;
 	int		i;
 
+	check_argnb(argc);
 	i = 0;
 	pipex = malloc(sizeof(t_pipex));
 	if (pipex == NULL)
