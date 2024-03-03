@@ -11,23 +11,43 @@
 /* ************************************************************************** */
 
 #include "pipex_exec.h"
-# include "pipex_pipe.h"
+#include "pipex_pipe.h"
 #include "pipex_cmd.h"
 #include "pipex.h"
 
+static size_t	nb_arg(char **cmd)
+{
+	size_t	i;
+
+	i = 0;
+	while (cmd[i] != NULL)
+		i++;
+	return (i);
+}
+
 static char	**init_cmd(t_pipex *pipex, char **cmd, char *arg, char **envp)
 {
+	size_t	nb;
+
 	cmd = ft_split(arg, ' ');
 	if (cmd == NULL)
-		exit_child();
-	cmd[0] = get_cmd_path(pipex, envp, cmd[0]);
-	free_cmd(pipex->paths);
-	free_pipex(pipex);
-	if (cmd[0] == NULL)
 	{
-		free_cmd(cmd);
+		free_pipex(pipex);
 		exit_child();
 	}
+	nb = nb_arg(cmd);
+	cmd[0] = get_cmd_path(pipex, envp, cmd[0]);
+	if (pipex->paths == NULL)
+	{
+		free_cmd(cmd);
+		free(cmd);
+		free_pipex(pipex);
+		exit_child();
+	}
+	free_cmd(pipex->paths);
+	free(pipex->paths);
+	free_pipex(pipex);
+	check_cmd(nb, cmd);
 	return (cmd);
 }
 
@@ -44,7 +64,7 @@ int	exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp)
 	{
 		if (dup_fd(pipex, arg_nb) == 1)
 		{
-			close_pipes(pipex);
+			free_pipex(pipex);
 			exit_child();
 		}
 		close_pipes(pipex);

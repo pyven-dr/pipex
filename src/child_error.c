@@ -19,3 +19,22 @@ void	exit_child(void)
 	perror("Child error");
 	exit(1);
 }
+
+void	check_cmd(size_t nb, char **cmd)
+{
+	if (cmd[0] == NULL && nb > 0)
+	{
+		free_cmd(cmd + 1);
+		free(cmd);
+		close(0);
+		close(1);
+		exit(1);
+	}
+	else if (cmd[0] == NULL && nb == 0)
+	{
+		free(cmd);
+		close(0);
+		close(1);
+		exit(1);
+	}
+}

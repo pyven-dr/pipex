@@ -44,7 +44,7 @@ NAME = pipex
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_DIR)/$(LIBFT)
-	$(CC) -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT) -g
+	$(CC) -g -o $(NAME) $(CFLAGS) $(OBJ) $(LIBFT_DIR)/$(LIBFT)
 
 -include $(DEP)
 

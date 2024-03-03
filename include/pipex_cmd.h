@@ -17,6 +17,7 @@
 # include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 char	*find_path(char	**envp);
 char	*find_command(char **path, char *command);

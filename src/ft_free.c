@@ -22,7 +22,7 @@ void	free_pipex(t_pipex *pipex)
 
 void	free_cmd(char **cmd)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (cmd[i] != NULL)
@@ -30,5 +30,4 @@ void	free_cmd(char **cmd)
 		free(cmd[i]);
 		i++;
 	}
-	free(cmd);
 }

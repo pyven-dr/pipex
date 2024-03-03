@@ -23,5 +23,6 @@ int		dup_fd(t_pipex *pipex, int arg_nb);
 int		exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp);
 void	free_cmd(char **cmd);
 void	exit_child(void);
+void	check_cmd(size_t nb, char **cmd);
 
 #endif

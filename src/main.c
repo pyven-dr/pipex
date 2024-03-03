@@ -23,7 +23,8 @@ int	main(int argc, char **argv, char **envp)
 	pipex = malloc(sizeof(t_pipex));
 	if (pipex == NULL)
 		return (1);
-	init(pipex, argc, argv);
+	if (init(pipex, argc, argv) == 1)
+		return (free(pipex), 1);
 	if (pipex->fd_infile == -1)
 		i++;
 	if (pipex->fd_outfile == -1)
@@ -38,23 +39,3 @@ int	main(int argc, char **argv, char **envp)
 		;
 	return (0);
 }
-
-/*int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	int file = open("test.txt", O_WRONLY);
-	printf("%d\n", access("/usr/bin/cat", F_OK));
-	dup2(file, 1);
-	close(file);
-	char *args[3];
-	args[0] = "/usr/bin/cat";
-	args[1] = "./src/main.c";
-	args[2] = NULL;
-	int id = fork();
-	if (id == 0)
-		execve(args[0], args, envp);
-	wait(NULL);
-	printf("test %d\n", id);
-	return (0);
-}*/

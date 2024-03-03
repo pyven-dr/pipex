@@ -23,7 +23,7 @@ int	init(t_pipex *pipex, int argc, char **argv)
 	pipex->fd_outfile = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (pipex->fd_outfile == -1)
 		perror(argv[argc - 1]);
-	if (create_pipes(pipex, argc) == -1)
+	if (create_pipes(pipex, argc) == 1)
 	{
 		perror("Pipe error");
 		close(pipex->fd_infile);

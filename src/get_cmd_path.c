@@ -22,7 +22,7 @@ char	*get_cmd_path(t_pipex *pipex, char **envp, char *command)
 		path = find_path(envp);
 		pipex->paths = ft_split(path, ':');
 		if (pipex->paths == NULL)
-			return (NULL);
+			return (free(command), NULL);
 	}
 	command_path = NULL;
 	if (command != NULL)
