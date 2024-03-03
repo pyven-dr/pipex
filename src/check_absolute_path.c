@@ -14,7 +14,8 @@
 
 char	*check_absolute_path(char *cmd)
 {
-	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/') \
+		|| (cmd[0] == '.' && cmd[1] == '.' && cmd[2] == '/'))
 	{
 		if (access(cmd, F_OK) == 0)
 			return (ft_strdup(cmd));
