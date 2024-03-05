@@ -20,6 +20,8 @@ char	*get_cmd_path(t_pipex *pipex, char **envp, char *command)
 	if (pipex->paths == NULL)
 	{
 		path = find_path(envp);
+		if (path == NULL)
+			return(free(command), NULL);
 		pipex->paths = ft_split(path, ':');
 		if (pipex->paths == NULL)
 			return (free(command), NULL);

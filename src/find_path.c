@@ -17,7 +17,9 @@ char	*find_path(char	**envp)
 	size_t	i;
 
 	i = 0;
-	while (ft_strncmp("PATH", envp[i], 4) != 0)
+	while (envp[i] != NULL && ft_strncmp("PATH", envp[i], 4) != 0)
 		i++;
+	if (envp[i] == NULL)
+		return (NULL);
 	return (envp[i] + 5);
 }

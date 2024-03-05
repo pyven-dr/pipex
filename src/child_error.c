@@ -12,11 +12,12 @@
 
 #include "pipex_exec.h"
 
-void	exit_child(void)
+void	exit_child(char *error)
 {
 	close(0);
 	close(1);
-	perror("Child error");
+	if (error != NULL)
+		perror(error);
 	exit(1);
 }
 

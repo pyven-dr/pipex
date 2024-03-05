@@ -33,7 +33,7 @@ static char	**init_cmd(t_pipex *pipex, char **cmd, char *arg, char **envp)
 	if (cmd == NULL)
 	{
 		free_pipex(pipex);
-		exit_child();
+		exit_child("Child error");
 	}
 	nb = nb_arg(cmd);
 	cmd[0] = get_cmd_path(pipex, envp, cmd[0]);
@@ -42,7 +42,8 @@ static char	**init_cmd(t_pipex *pipex, char **cmd, char *arg, char **envp)
 		free_cmd(cmd);
 		free(cmd);
 		free_pipex(pipex);
-		exit_child();
+		ft_putstr_fd("PATH not found\n", 2);
+		exit_child(NULL);
 	}
 	free_cmd(pipex->paths);
 	free(pipex->paths);
@@ -65,13 +66,12 @@ int	exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp)
 		if (dup_fd(pipex, arg_nb) == 1)
 		{
 			free_pipex(pipex);
-			exit_child();
+			exit_child("Child error");
 		}
 		close_pipes(pipex);
 		cmd = init_cmd(pipex, cmd, arg, envp);
 		execve(cmd[0], cmd, envp);
-		perror("Execve error");
-		exit_child();
+		exit_child("Execve error");
 	}
 	return (0);
 }
