@@ -71,6 +71,8 @@ int	exec_cmd(t_pipex *pipex, char *arg, int arg_nb, char **envp)
 		close_pipes(pipex);
 		cmd = init_cmd(pipex, cmd, arg, envp);
 		execve(cmd[0], cmd, envp);
+		free_cmd(cmd);
+		free(cmd);
 		exit_child("Execve error");
 	}
 	return (0);
