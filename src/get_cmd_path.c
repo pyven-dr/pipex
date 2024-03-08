@@ -17,16 +17,20 @@ char	*get_cmd_path(t_pipex *pipex, char **envp, char *command)
 	char	*path;
 	char	*command_path;
 
+	command_path = NULL;
 	if (pipex->paths == NULL)
 	{
 		path = find_path(envp);
 		if (path == NULL)
-			return (free(command), NULL);
+		{
+			command_path = check_absolute_path(command);
+			free(command);
+			return (command_path);
+		}
 		pipex->paths = ft_split(path, ':');
 		if (pipex->paths == NULL)
 			return (free(command), NULL);
 	}
-	command_path = NULL;
 	if (command != NULL)
 		command_path = check_absolute_path(command);
 	if (command_path == NULL && command != NULL)

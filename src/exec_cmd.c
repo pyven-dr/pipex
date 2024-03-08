@@ -37,7 +37,7 @@ static char	**init_cmd(t_pipex *pipex, char **cmd, char *arg, char **envp)
 	}
 	nb = nb_arg(cmd);
 	cmd[0] = get_cmd_path(pipex, envp, cmd[0]);
-	if (pipex->paths == NULL)
+	if (pipex->paths == NULL && cmd[0] == NULL)
 	{
 		free_cmd(cmd);
 		free(cmd);
@@ -45,7 +45,8 @@ static char	**init_cmd(t_pipex *pipex, char **cmd, char *arg, char **envp)
 		ft_putstr_fd("PATH not found\n", 2);
 		exit_child(NULL);
 	}
-	free_cmd(pipex->paths);
+	if (pipex->paths != NULL)
+		free_cmd(pipex->paths);
 	free(pipex->paths);
 	free_pipex(pipex);
 	check_cmd(nb, cmd);
