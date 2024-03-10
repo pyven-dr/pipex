@@ -15,7 +15,7 @@ compile
 make
 ```
 
-The program ehave exactly the same as this shell command
+The program behave exactly the same as this shell command
 ```bash
 < infile cmd1 | cmd2 > outfile
 ```
